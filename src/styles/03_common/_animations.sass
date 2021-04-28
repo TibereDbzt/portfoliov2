@@ -1,0 +1,73 @@
+/*  Classes to bind with elements to animate.
+    Check animation.js script to understand.
+.animSkewTY
+    overflow: hidden
+
+    > .animSkewTY__inner
+        display: inline-block
+        transform-origin: top left
+
+.animSkewOpacity
+    transform-origin: top left
+
+.animBand
+    overflow: hidden
+
+    > .animBand__band
+        display: inline-block
+        position: absolute
+        top: 0
+        right: 0
+        width: 100%
+        height: 100%
+        background: $black
+        padding: 2px 0
+
+.animTableReveal
+    position: absolute
+    background: $white
+    overflow: hidden
+
+    > .animTableReveal__inner
+        display: block;
+
+    ~ .animTableReveal__list
+        padding-top: 35px
+
+
+/*  Test animations
+.toUp
+    display: inline-block
+    transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1)
+    transform: translateY(100%)
+
+    &.animating
+        transform: translateY(0px)
+
+.crispy1
+    animation: crispy1 infinite 0.2s
+
+.crispy2
+    animation: crispy2 infinite 0.2s
+
+
+@keyframes crispy1
+    0%
+        transform: rotate(1deg) translateX(1px)
+    33%
+        transform: rotate(2deg) translateX(0px)
+    66%
+        transform: rotate(1deg) translateY(-1px)
+    100%
+        transform: rotate(2deg) translateY(1px)
+
+@keyframes crispy2
+    0%
+        transform: rotate(1deg) translateX(1px)
+    33%
+        transform: rotate(1deg) translateX(2px)
+    66%
+        transform: rotate(1deg) translateY(1px)
+    100%
+        transform: rotate(2deg) translateY(0px)
+        

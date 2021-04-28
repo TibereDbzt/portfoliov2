@@ -1,0 +1,83 @@
+// .nav 
+//   display: flex
+//   position: absolute
+//   left: 50%
+//   top: 50%
+//   transform: translate(-50%, -50%)  
+
+.link 
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 1rem
+
+.settings-icon 
+  display: block
+  width: 40px
+  height: 40px
+
+.settings-icon__line 
+  stroke: $black
+  stroke-width: 5px
+  transition: all 0.2s ease 0.05s
+
+.settings-icon__rect 
+  stroke: $black
+  fill: $white
+  stroke-width: 5px
+  transition: all 0.2s ease 0.05s
+
+.link:hover .settings-icon__line,
+.link:hover .settings-icon__rect 
+  stroke: $black
+  transition: all 0.2s ease 0.05s
+
+.link:hover .settings-icon__group--1 .settings-icon__rect 
+  transform: translateY(20px)
+
+.link:hover .settings-icon__group--2 .settings-icon__rect 
+  transform: translateY(-20px)
+
+.link:hover .settings-icon__group--3 .settings-icon__rect 
+  transform: translateY(25px)
+
+.nav
+  position: fixed
+  top: 0
+  left: 8px
+  height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  z-index: 1000
+
+  .link:hover
+
+    .project-link:nth-of-type(2)
+      left: 0px
+      top: 0px
+
+    .icon-skill
+      transform: rotate(-90deg)
+
+  .icon-container
+    width: 24px
+    animation: all ease 0.2s
+  
+  .project-link__container
+    position: relative
+
+    .project-link
+      font-family: 'Graphik Black'
+      letter-spacing: 2px
+      font-size: 18px
+      transition: all ease 0.2s
+
+      &:nth-of-type(2)
+        position: absolute
+        left: 2px
+        top: 2px
+        color: transparent
+        -webkit-text-stroke: 1px $black
+      
