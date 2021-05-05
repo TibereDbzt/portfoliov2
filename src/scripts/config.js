@@ -2,8 +2,7 @@ export const sections = [
     document.querySelector('#hero'),
     document.querySelector('#skills'),
     document.querySelector('#education'),
-    document.querySelector('#worldmapquiz'),
-    document.querySelector('#todolist')
+    document.querySelector('#works'),
 ]
 
 export const colors = {

@@ -8,4 +8,12 @@ const map = (value, in_min, in_max, out_min, out_max) => {
     );
 };
 
-export {lerp, map};
+const getMousePos = e => {
+    return {x: e.clientX, y: e.clientY};
+}
+
+const getClientSize = e => {
+    return {width: window.innnerWidth, height: window.innerHeight};
+}
+
+export {lerp, map, getMousePos, getClientSize};

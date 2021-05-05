@@ -1,7 +1,9 @@
 import paper from 'paper';
 import SimplexNoise from 'simplex-noise';
-import {clientSize} from './utils/getClientSize';
-import {map} from './utils/calculation';
+import { map, getClientSize } from './modules/utils';
+
+let client = {width: window.innerWidth, height: window.innerHeight};
+window.addEventListener('resize', e => client = getClientSize(e));
 
 const initCanvas = () => {
     const noiseScale = 80;
@@ -13,7 +15,7 @@ const initCanvas = () => {
 
     const background = new paper.Path.Rectangle({
         point: [0, 0],
-        size: [clientSize.width, clientSize.height]
+        size: [client.width, client.height]
     });
 
     background.fillColor = '#000000';
@@ -47,12 +49,12 @@ const initCanvas = () => {
     group.applyMatrix = false;
     // group.fullySelected = true;
 
-    const rateText = new paper.PointText(new paper.Point(clientSize.width/2, clientSize.height/2));
+    const rateText = new paper.PointText(new paper.Point(client.width/2, client.height/2));
     rateText.fillColor = '#0000000';
     rateText.fontFamily = 'Graphik';
     // rateText.applyMatrix = false;
 
-    group.position = new paper.Point(clientSize.width/2, clientSize.height/2);
+    group.position = new paper.Point(client.width/2, client.height/2);
 
     const noiseObjects = [
         loader[0].segments.map(() => new SimplexNoise()),
@@ -94,7 +96,7 @@ const initCanvas = () => {
     }, 500);
 
     window.addEventListener('resize', () => {
-        group.position = new paper.Point(clientSize.width/2, clientSize.height/2);
+        group.position = new paper.Point(client.width/2, client.height/2);
     });
 
     paper.view.onFrame = event => {

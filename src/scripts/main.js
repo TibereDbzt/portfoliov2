@@ -1,6 +1,14 @@
-import 'normalize.css';
+// styles
 import '../styles/main.sass';
-import './cursor.js';
+
+// logic
 import './loader.js';
-import './navigation.js';
-// import './about.js';
+
+// components
+import { SidebarMenu } from './SidebarMenu';
+import { PaperCanvas } from './PaperCanvas.js';
+import { DotCursor } from './DotCursor';
+
+new SidebarMenu(document.querySelector('[data-sidebar-menu]'));
+new PaperCanvas(document.querySelector('.cursor--canvas'));
+new DotCursor(document.querySelector('.cursor'));

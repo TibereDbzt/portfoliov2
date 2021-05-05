@@ -46,8 +46,6 @@
     "gsap": "^3.6.1",
     "jquery": "^3.5.0",
     "matter-js": "^0.17.0",
-    "modularscroll": "^1.0.7",
-    "normalize.css": "^8.0.1",
     "paper": "^0.12.15",
     "simplex-noise": "^2.4.0",
     "virtual-scroll": "^2.1.1"

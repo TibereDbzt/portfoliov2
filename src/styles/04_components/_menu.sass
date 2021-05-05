@@ -1,0 +1,94 @@
+.link 
+  display: flex
+  justify-content: center
+  align-items: center
+
+.menu
+  position: fixed
+  top: 0
+  padding-left: 14px
+  height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  z-index: 1000
+  
+  .menu__marker
+    display: block
+    position: fixed
+    top: 0
+    left: 0
+    width: 6px
+    height: 22px
+    background: $black
+    transition: transform 0.3s ease
+
+  .menu__nav
+
+    .menu__folder
+      position: relative
+
+      &.open
+
+        > .link
+          position: relative
+          visibility: visible
+          top: unset
+          left: unset
+
+      > .link
+        position: absolute
+        top: 0
+        left: 0
+        visibility: hidden
+
+      > .link:first-of-type
+        position: relative
+        visibility: visible
+  
+    .menu__item--project
+      padding: 0.8rem
+
+    .icon-container
+      display: flex
+      justify-content: center
+      align-items: center
+      animation: all ease 0.2s
+
+      &.icon-skill
+        width: 28px
+        padding: 1.3rem 0.7rem
+        stroke: $black
+
+      &.icon-education
+        width: 31px
+        padding: 0.4rem 0.7rem
+        stroke: $black
+
+      &.icon-projects
+        width: 27px
+        padding: 0.8rem 0.7rem
+        stroke: $black
+
+      &.icon-contact
+        width: 25px
+        padding: 0.88rem 0.7rem
+        stroke: $black
+    
+    .project-link__container
+      position: relative
+
+      .project-link
+        font-family: 'Graphik Black'
+        letter-spacing: 2px
+        font-size: 18px
+        transition: all ease 0.2s
+
+        &:nth-of-type(2)
+          position: absolute
+          left: 2px
+          top: 2px
+          color: transparent
+          -webkit-text-stroke: 1px $black
+        
