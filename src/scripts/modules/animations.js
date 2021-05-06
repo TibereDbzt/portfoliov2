@@ -57,7 +57,7 @@ export const animSkewOpacity = (el, duration, delay, easing, offset) => {
             { opacity: '0', transform: 'skew(0, 8deg)' },
             { opacity: '0', transform: 'skew(0, 5deg)' },
             { opacity: '1', transform: 'skew(0, 0)' }
-        ], { duration: duration, delay: offset+delay, easing: easing, fill: 'both' }
+        ], { duration: duration, delay: delay, easing: easing, fill: 'both' }
     ),
     document.timeline);
 }

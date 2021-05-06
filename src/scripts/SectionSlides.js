@@ -6,9 +6,9 @@ import { sections } from './config';
 
 window.onbeforeunload = () => window.scrollTo(0, 0);
 
-export class StepsNavigation {
+export class SectionSlides {
 
-    constructor (el) {
+    constructor (el, menu) {
         this.DOM = {
             container: el
         };
@@ -16,6 +16,8 @@ export class StepsNavigation {
             preventTouch: true,
             passive: true
         });
+
+        this.menu = menu;
         
         this.sections = {
             list: sections,
@@ -26,12 +28,18 @@ export class StepsNavigation {
         
         this.nbOfWorks = Object.keys(sections);
 
+        this.sumScroll = 0;
+        this.timer;
+
         this.translateY = 0;
         this.isScrolling = false;
 
         // CREATE ROLLER CLASS --> séparer les responsabilités
         this.worksIndex = 0;
 
+        this.rollerSection = new RollerSection(document.querySelector('[data-roller-section]'));
+        this.indexRollerSection = 3;
+        
         this.iniEvents();
     }
 
@@ -54,7 +62,6 @@ export class StepsNavigation {
         const animations = {
             'skills' : animateSkills(this.currentSection),
             'education' : animateEducation(this.currentSection),
-            // 'works' : animateWorks(this.currentSection)
         }
         return animations[sectionID];
     }
@@ -74,18 +81,62 @@ export class StepsNavigation {
         this.animateSection();
     }
 
+    onClickMenu (indexSection) {
+        this.setCurrentSection(indexSection);
+        this.scroll();
+    }
+
+    bindSectionSlide (handler) {
+        this.onSectionSlide = handler;
+    }
+
     onScroll (deltaY) {
+        console.log('event');
+        this.sumScroll += deltaY;
+
+        if (!this.timer) {
+                this.timer = setTimeout(() => {
+                console.log("end timer");
+                this.sumScroll = 0;
+                clearTimeout(this.timer);
+                this.timer = undefined;
+            }, 700);
+        }
+        
+        if (!(Math.abs(this.sumScroll) > 600)) return;
+
+        
         if (this.isScrolling) return;
 
-        if (deltaY < 0 && this.isAtBottom()) return;
-        if (deltaY > 0 && this.isAtTop()) return;
+        const goesDown = deltaY < 0;
+        
+        if (this.sections.index === this.indexRollerSection) {
+            if (goesDown && !this.rollerSection.isAtBottom()) {
+                this.rollerSection.roll(1);
+                return;
+            };
+            if (!goesDown && !this.rollerSection.isAtTop()) {
+                this.rollerSection.roll(-1);
+                return;
+            }
+        }
+
+        if (goesDown && this.isAtBottom()) return;
+        this.rollerSection.reset();
+        if (!goesDown && this.isAtTop()) return;
 
         // if (this.isOnRollerSection() && !this.rollerSection.isOnBoundaries()) return;
         
         if (deltaY < 0) this.sections.index++;
         if (deltaY > 0) this.sections.index--;
 
+        if (this.sections.index === this.indexRollerSection) {
+            this.rollerSection.roll(1);
+        }
+
         this.setCurrentSection(this.sections.index);
+
+        this.onSectionSlide(this.sections.index);
 
         this.scroll();
     }

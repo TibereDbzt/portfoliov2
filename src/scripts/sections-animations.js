@@ -6,11 +6,11 @@ const animateSkills = (section) => {
     animSkewTY(title, 1200, 0, easings.easeOutQuint).play();
 
     const description = section.querySelector('.animSkewOpacity');
-    animSkewOpacity(description, 1500, 200, easings.easeInOutQuint, 0).play();
+    animSkewOpacity(description, 1500, 25000, easings.easeOutQuint, 0).play();
 
     const skillNames = section.querySelectorAll('.animTableReveal');
     skillNames.forEach((el, i) => {
-        const anim = animTableReveal(el, 1200, 250*i, easings.easeInOutQuint, 750);
+        const anim = animTableReveal(el, 1200, 250*i, easings.easeOutQuint, 750);
         anim.mask.play();
         anim.content.play();
     });

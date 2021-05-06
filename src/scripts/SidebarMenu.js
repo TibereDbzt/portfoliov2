@@ -1,18 +1,15 @@
-import { StepsNavigation } from './StepsNavigation';
-import { sections } from './config';
-
-console.log(document.querySelector('[data-scroll-container'));
-const navigation = new StepsNavigation(document.querySelector('[data-scroll-container'));
-
 export class SidebarMenu {
 
-    constructor (el) {
+    constructor (el, stepsNavigation) {
         this.DOM = {
             sidebar: el,
             marker: el.querySelector('[data-marker'),
             nav: el.querySelector('[data-nav]'),
             entries: el.querySelectorAll('[data-entry]')
         };
+
+        this.stepsNavigation = stepsNavigation;
+
         this.initElements();
         this.initEvents();
     }
@@ -30,11 +27,19 @@ export class SidebarMenu {
             this.moveMarker(entry);
             this.DOM.entries.forEach((el, i) => {
                 if (el === entry) {
-                    navigation.setCurrentSection(i);
-                    navigation.scroll();
+                    this.onClickMenu(i+1);
+                    this.stepsNavigation.scroll();
                 }
             });
         });
+    }
+
+    bindClickMenu (callback) {
+        this.onClickMenu = callback;
+    }
+
+    onSlideSection (sectionIndex) {
+        this.moveMarker(this.DOM.entries[sectionIndex]);
     }
 
     moveMarker (target) {
