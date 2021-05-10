@@ -31,6 +31,8 @@ export default class NoisyCursor {
         this.stuckY = 0;
 
         this.bigCoordinates = [];
+
+        this.targetBox = 0;
     }
 
     createNoise (shape) {
@@ -60,9 +62,9 @@ export default class NoisyCursor {
     }
 
     onMouseEnter (e) {
-        const navItemBox = e.currentTarget.getBoundingClientRect();
-        this.stuckX = Math.round(navItemBox.left + navItemBox.width / 2);
-        this.stuckY = Math.round(navItemBox.top + navItemBox.height / 2);
+        this.targetBox = e.currentTarget.getBoundingClientRect();
+        this.stuckX = Math.round(this.targetBox.left + this.targetBox.width / 2);
+        this.stuckY = Math.round(this.targetBox.top + this.targetBox.height / 2);
         this.isStuck = true;
     }
 
@@ -105,7 +107,7 @@ export default class NoisyCursor {
         this.group.position = new paper.Point(this.lastX, this.lastY);
         
         // LINK HOVERED and NOT BIG ENOUGH
-        if (this.isStuck && this.cursors[0].bounds.width < shapeBounds.width) {
+        if (this.isStuck && this.cursors[0].bounds.width < this.targetBox.width + 20) {
             this.cursors.forEach(p => {
                 p.scale(1.08);
             });
@@ -123,7 +125,7 @@ export default class NoisyCursor {
         }
 
         // LINK HOVERED and BIG ENOUGH
-        if (this.isStuck && this.cursors[0].bounds.width >= shapeBounds.width) {
+        if (this.isStuck && this.cursors[0].bounds.width >= this.targetBox.width + 20) {
             this.isNoisy = true;
             // hited once to set bigCoordinates
             if (this.bigCoordinates.length === 0) {

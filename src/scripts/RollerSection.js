@@ -21,7 +21,6 @@ export class RollerSection {
 
     reset () {
         this.index = -1;
-        // this.roll();
         this.DOM.masks.forEach(mask => {
             const containers = mask.querySelectorAll('[data-roller-container]');
             containers.forEach(container => {
@@ -38,7 +37,8 @@ export class RollerSection {
     roll (deltaY) {
         const goesDown = deltaY < 0;
 
-        goesDown ? this.index += 1 : this.index -= 1;
+        if (this.index === -1) this.index = 0;
+        else goesDown ? this.index += 1 : this.index -= 1;
         
         this.DOM.masks.forEach(mask => {
             const containers = mask.querySelectorAll('[data-roller-container]');

@@ -23,7 +23,7 @@ export class PaperCanvas {
 
     initEvents () {
         // events delegation ??
-        document.querySelectorAll('.link').forEach((linkItem) => {
+        document.querySelectorAll('[data-link]').forEach((linkItem) => {
             linkItem.addEventListener('mouseenter', e => this.noisyCursor.onMouseEnter(e));
             linkItem.addEventListener('mouseleave', () => this.noisyCursor.onMouseLeave());
         });

@@ -9,7 +9,7 @@ export const animSkewTY = (el, duration, delay, easing) => {
     return new Animation(new KeyframeEffect(
         el,
         [
-            { transform: `translate3D(0, 140px, 0) skew(0, 40deg)` },
+            { transform: `translate3D(0, 180px, 0) skew(0, 40deg)` },
             { transform: `translate3D(0, 0, 0) skew(0, 0)` }
         ],
         { duration: duration, delay: delay, easing: easing, fill: 'both' }
@@ -93,6 +93,6 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
         ],
         { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
     ));
-    const animContent = animSkewTY(content, 2500, 1600, easings.easeOutQuint);
+    const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
     return {mask: animMask, content: animContent};
 };

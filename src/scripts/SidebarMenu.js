@@ -36,7 +36,7 @@ export class SidebarMenu {
     }
 
     onSlideSection (sectionIndex) {
-        this.moveMarker(this.DOM.entries[sectionIndex]);
+        this.moveMarker(this.DOM.entries[sectionIndex - 1]);
     }
 
     moveMarker (target) {

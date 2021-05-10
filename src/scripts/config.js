@@ -3,6 +3,7 @@ export const sections = [
     document.querySelector('#skills'),
     document.querySelector('#education'),
     document.querySelector('#works'),
+    document.querySelector('#contact')
 ];
 
 export const colors = {

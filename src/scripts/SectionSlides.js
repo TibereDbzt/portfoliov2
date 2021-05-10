@@ -1,7 +1,7 @@
-import { debounce } from 'lodash-es';
-
 import VirtualScroll from 'virtual-scroll';
 import { gsap } from 'gsap';
+import { debounce } from 'lodash-es';
+
 import { RollerSection } from './RollerSection';
 import { animateSkills, animateEducation } from './sections-animations';
 import { sections } from './config';
@@ -40,13 +40,13 @@ export class SectionSlides {
     }
 
     initEvents () {
-        const bounced = debounce(this.onScroll.bind(this), 400, {
+        const onScrollDebounced = debounce(this.onScroll.bind(this), 400, {
             'leading': true,
             'trailing': false
         });
         this.scroller.on(e => {
-            console.log(e.originalEvent);
-            bounced(e.deltaY);
+            // console.log(e.originalEvent);
+            onScrollDebounced(e.deltaY);
         });
     }
 
@@ -63,10 +63,10 @@ export class SectionSlides {
     animateSection () {
         const sectionID = this.currentSection.id;
         const animations = {
-            'skills': animateSkills(this.currentSection),
-            'education': animateEducation(this.currentSection),
+            'skills': animateSkills,
+            'education': animateEducation
         };
-        return animations[sectionID];
+        return animations[sectionID](this.currentSection);
     }
 
     setCurrentSection (i) {
@@ -81,7 +81,7 @@ export class SectionSlides {
     scroll () {
         this.setTranslateY();
         this.animateContainer();
-        this.animateSection();
+        if (!this.isOnRollerSection()) this.animateSection();
     }
 
     onClickMenu (indexSection) {

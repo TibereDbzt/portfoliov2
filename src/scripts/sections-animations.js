@@ -3,10 +3,10 @@ import { easings } from './config';
 
 const animateSkills = (section) => {
     const title = section.querySelector('.animSkewTY__inner');
-    animSkewTY(title, 1200, 0, easings.easeOutQuint).play();
+    animSkewTY(title, 1600, 0, easings.easeOutQuint).play();
 
     const description = section.querySelector('.animSkewOpacity');
-    animSkewOpacity(description, 1500, 25000, easings.easeOutQuint, 0).play();
+    animSkewOpacity(description, 1500, 500, easings.easeOutQuint, 0).play();
 
     const skillNames = section.querySelectorAll('.animTableReveal');
     skillNames.forEach((el, i) => {
@@ -18,7 +18,7 @@ const animateSkills = (section) => {
 
 const animateEducation = (section) => {
     const title = section.querySelector('.animSkewTY__inner');
-    animSkewTY(title, 1200, 0, easings.easeOutQuint).play();
+    animSkewTY(title, 1600, 0, easings.easeOutQuint).play();
 
     const dates = section.querySelectorAll('.animOpacity');
     dates.forEach((el, i) => {
