@@ -10,11 +10,11 @@ const animateSkills = (section) => {
 
     const skillNames = section.querySelectorAll('.animTableReveal');
     skillNames.forEach((el, i) => {
-        const anim = animTableReveal(el, 1200, 250*i, easings.easeOutQuint, 750);
+        const anim = animTableReveal(el, 1200, 250 * i, easings.easeOutQuint, 750);
         anim.mask.play();
         anim.content.play();
     });
-}
+};
 
 const animateEducation = (section) => {
     const title = section.querySelector('.animSkewTY__inner');
@@ -27,15 +27,15 @@ const animateEducation = (section) => {
 
     const education = section.querySelectorAll('.animBand');
     education.forEach((el, i) => {
-        const anim = animBandReveal(el, 1500, 500*i, easings.easeInOutQuint, 500);
+        const anim = animBandReveal(el, 1500, 500 * i, easings.easeInOutQuint, 500);
         anim.band.play();
         anim.content.play();
     });
 
     const descriptions = section.querySelectorAll('.animSkewOpacity');
     descriptions.forEach((el, i) => {
-        animSkewOpacity(el, 1500, 500*i, easings.easeInOutQuint, 500).play();
+        animSkewOpacity(el, 1500, 500 * i, easings.easeInOutQuint, 500).play();
     });
-}
+};
 
 export { animateSkills, animateEducation };

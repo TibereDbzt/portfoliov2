@@ -1,4 +1,4 @@
-import { colors, easings } from './../config'
+import { colors, easings } from './../config';
 
 /*
     REQUIRES :
@@ -12,10 +12,10 @@ export const animSkewTY = (el, duration, delay, easing) => {
             { transform: `translate3D(0, 140px, 0) skew(0, 40deg)` },
             { transform: `translate3D(0, 0, 0) skew(0, 0)` }
         ],
-        { duration: duration, delay: delay, easing: easing,  fill: 'both' }
+        { duration: duration, delay: delay, easing: easing, fill: 'both' }
     ),
     document.timeline);
-}
+};
 /*
     REQUIRES :
     - inner span for the content
@@ -31,7 +31,7 @@ export const animBandReveal = (el, duration, delay, easing, offset) => {
             { width: '100%', transform: 'translate3D(-100%, 0, 0)' },
             { width: '0', transform: 'translate3D(0, 0, 0)' }
         ],
-        { duration: duration, delay: offset+delay, easing: easing, fill: 'both' }
+        { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
     ),
     document.timeline);
     const animContent = new Animation(new KeyframeEffect(
@@ -40,11 +40,11 @@ export const animBandReveal = (el, duration, delay, easing, offset) => {
             { color: colors.white },
             { color: colors.black }
         ],
-        { duration: 1, delay: offset*2.5+delay-17, fill: 'both' }
+        { duration: 1, delay: offset * 2.5 + delay - 17, fill: 'both' }
     ),
     document.timeline);
     return {band: animBand, content: animContent};
-}
+};
 
 /*
     REQUIRES :
@@ -60,7 +60,7 @@ export const animSkewOpacity = (el, duration, delay, easing, offset) => {
         ], { duration: duration, delay: delay, easing: easing, fill: 'both' }
     ),
     document.timeline);
-}
+};
 
 /*
     REQUIRES :
@@ -72,10 +72,10 @@ export const animOpacity = (el, duration, delay, easing, offset) => {
         [
             { opacity: '0' },
             { opacity: '1' }
-        ], { duration: duration, delay: offset+delay, easing: easing, fill: 'both' }
+        ], { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
     ),
     document.timeline);
-}
+};
 
 /*
     REQUIRES :
@@ -91,8 +91,8 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
             { paddingTop: '120%', borderBottom: '1px solid rgba(0, 0, 0, 1)', offset: 0.2 },
             { paddingTop: '0', borderBottom: '1px solid black' }
         ],
-        { duration: duration, delay: offset+delay, easing: easing, fill: 'both'}
+        { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
     ));
     const animContent = animSkewTY(content, 2500, 1600, easings.easeOutQuint);
     return {mask: animMask, content: animContent};
-}
+};

@@ -4,7 +4,7 @@ import { lerp, map, getMousePos } from './modules/utils';
 import { colors } from './config';
 
 let mouse = {x: -10, y: -10};
-window.addEventListener('mousemove', e => mouse = getMousePos(e));
+window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 
 const shapeBounds = {
     width: 60,
@@ -56,7 +56,7 @@ export default class NoisyCursor {
             children: this.cursors,
             strokeColor: colors.black,
             strokeWidth: 1
-        })
+        });
     }
 
     onMouseEnter (e) {
@@ -70,7 +70,7 @@ export default class NoisyCursor {
         this.isStuck = false;
     }
 
-    updateCoords(lastX, lastY, currentX, currentY) {
+    updateCoords (lastX, lastY, currentX, currentY) {
         this.lastX = lerp(lastX, currentX, 0.2);
         this.lastY = lerp(lastY, currentY, 0.2);
     }
@@ -110,7 +110,7 @@ export default class NoisyCursor {
                 p.scale(1.08);
             });
         // LINK NOT HOVERED and TOO BIG
-        } else if (!this.isStuck && this.cursors[0].bounds.width > 30) { ///////////////////////////////
+        } else if (!this.isStuck && this.cursors[0].bounds.width > 30) {
             // hited once when leave a link
             if (this.isNoisy) {
                 this.removeNoise();
@@ -142,7 +142,7 @@ export default class NoisyCursor {
             });
         }
         this.cursors.forEach(c => {
-            c.smooth({ type: 'geometric'});
+            c.smooth({ type: 'geometric' });
         });
     }
     

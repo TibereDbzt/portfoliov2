@@ -6,7 +6,7 @@ export class RollerSection {
         this.DOM = {
             roller: el,
             masks: el.querySelectorAll('[data-roller-mask]'),
-        }
+        };
         this.length = this.DOM.roller.dataset.rollerItems;
         this.index = -1;
     }
@@ -19,18 +19,27 @@ export class RollerSection {
         return this.index === this.length - 1;
     }
 
-    reset() {
+    reset () {
         this.index = -1;
+        // this.roll();
         this.DOM.masks.forEach(mask => {
             const containers = mask.querySelectorAll('[data-roller-container]');
             containers.forEach(container => {
-                gsap.set(container, {clearProps: 'y'});
+                gsap.set(container, {delay: 0.2, clearProps: 'y'});
             });
         });
     }
 
-    roll (delta) {
-        this.index += delta;
+    isLeaving (deltaY) {
+        const goesDown = deltaY < 0;
+        return (goesDown && this.isAtBottom()) || (!goesDown && this.isAtTop());
+    }
+
+    roll (deltaY) {
+        const goesDown = deltaY < 0;
+
+        goesDown ? this.index += 1 : this.index -= 1;
+        
         this.DOM.masks.forEach(mask => {
             const containers = mask.querySelectorAll('[data-roller-container]');
             containers.forEach(container => {

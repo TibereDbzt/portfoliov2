@@ -1,3 +1,5 @@
+import { debounce } from 'lodash-es';
+
 import VirtualScroll from 'virtual-scroll';
 import { gsap } from 'gsap';
 import { RollerSection } from './RollerSection';
@@ -8,7 +10,7 @@ window.onbeforeunload = () => window.scrollTo(0, 0);
 
 export class SectionSlides {
 
-    constructor (el, menu) {
+    constructor (el) {
         this.DOM = {
             container: el
         };
@@ -16,8 +18,6 @@ export class SectionSlides {
             preventTouch: true,
             passive: true
         });
-
-        this.menu = menu;
         
         this.sections = {
             list: sections,
@@ -28,23 +28,26 @@ export class SectionSlides {
         
         this.nbOfWorks = Object.keys(sections);
 
-        this.sumScroll = 0;
-        this.timer;
-
         this.translateY = 0;
         this.isScrolling = false;
 
-        // CREATE ROLLER CLASS --> séparer les responsabilités
         this.worksIndex = 0;
 
         this.rollerSection = new RollerSection(document.querySelector('[data-roller-section]'));
         this.indexRollerSection = 3;
         
-        this.iniEvents();
+        this.initEvents();
     }
 
-    iniEvents () {
-        this.scroller.on(e => this.onScroll(e.deltaY));
+    initEvents () {
+        const bounced = debounce(this.onScroll.bind(this), 400, {
+            'leading': true,
+            'trailing': false
+        });
+        this.scroller.on(e => {
+            console.log(e.originalEvent);
+            bounced(e.deltaY);
+        });
     }
 
     animateContainer () {
@@ -53,16 +56,16 @@ export class SectionSlides {
             y: this.translateY,
             duration: 0.4,
             ease: 'expo.inOut',
-            onComplete: () => this.isScrolling = false
-        })
+            onComplete: () => { this.isScrolling = false; }
+        });
     }
 
     animateSection () {
         const sectionID = this.currentSection.id;
         const animations = {
-            'skills' : animateSkills(this.currentSection),
-            'education' : animateEducation(this.currentSection),
-        }
+            'skills': animateSkills(this.currentSection),
+            'education': animateEducation(this.currentSection),
+        };
         return animations[sectionID];
     }
 
@@ -72,7 +75,7 @@ export class SectionSlides {
     }
 
     setTranslateY () {
-        this.translateY -= this.currentSection.getBoundingClientRect().top
+        this.translateY -= this.currentSection.getBoundingClientRect().top;
     }
 
     scroll () {
@@ -82,63 +85,44 @@ export class SectionSlides {
     }
 
     onClickMenu (indexSection) {
+        if (indexSection === this.sections.index) return;
+        if (this.isOnRollerSection()) this.rollerSection.reset();
         this.setCurrentSection(indexSection);
         this.scroll();
+        if (this.isOnRollerSection()) this.rollerSection.roll(-1);
     }
 
     bindSectionSlide (handler) {
         this.onSectionSlide = handler;
     }
 
+    isOnRollerSection () {
+        return this.sections.index === this.indexRollerSection;
+    }
+
     onScroll (deltaY) {
-        console.log('event');
-        this.sumScroll += deltaY;
-
-        if (!this.timer) {
-                this.timer = setTimeout(() => {
-                console.log("end timer");
-                this.sumScroll = 0;
-                clearTimeout(this.timer);
-                this.timer = undefined;
-            }, 700);
+        if (this.isOnRollerSection() && !this.rollerSection.isLeaving(deltaY)) {
+            this.rollerSection.roll(deltaY);
+            return;
         }
-        
-        if (!(Math.abs(this.sumScroll) > 600)) return;
 
-        
-        if (this.isScrolling) return;
+        if (this.isOnRollerSection() && this.rollerSection.isLeaving(deltaY)) this.rollerSection.reset();
 
         const goesDown = deltaY < 0;
-        
-        if (this.sections.index === this.indexRollerSection) {
-            if (goesDown && !this.rollerSection.isAtBottom()) {
-                this.rollerSection.roll(1);
-                return;
-            };
-            if (!goesDown && !this.rollerSection.isAtTop()) {
-                this.rollerSection.roll(-1);
-                return;
-            }
-        }
 
         if (goesDown && this.isAtBottom()) return;
-        this.rollerSection.reset();
         if (!goesDown && this.isAtTop()) return;
-
-        // if (this.isOnRollerSection() && !this.rollerSection.isOnBoundaries()) return;
         
-        if (deltaY < 0) this.sections.index++;
-        if (deltaY > 0) this.sections.index--;
-
-        if (this.sections.index === this.indexRollerSection) {
-            this.rollerSection.roll(1);
-        }
+        if (goesDown) this.sections.index++;
+        if (!goesDown) this.sections.index--;
 
         this.setCurrentSection(this.sections.index);
 
         this.onSectionSlide(this.sections.index);
 
         this.scroll();
+
+        if (this.isOnRollerSection()) this.rollerSection.roll(deltaY);
     }
 
     // HELPERS
@@ -150,7 +134,4 @@ export class SectionSlides {
         return this.sections.index === 0;
     }
 
-    isOnRollerSection () {
-        return this.currentSection.hasAttribute('data-section-roller');
-    }
 }

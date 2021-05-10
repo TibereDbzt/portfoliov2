@@ -1,7 +1,7 @@
 import { getMousePos } from './modules/utils';
 
 let mouse = {x: -10, y: -10};
-window.addEventListener('mousemove', e => mouse = getMousePos(e));
+window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 
 export class DotCursor {
 
@@ -14,5 +14,5 @@ export class DotCursor {
         this.DOM.style.transform = `translate3D(${mouse.x}px, ${mouse.y}px, 0)`;
         requestAnimationFrame(() => this.render());
     }
-    
+
 }

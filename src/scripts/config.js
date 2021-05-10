@@ -3,12 +3,12 @@ export const sections = [
     document.querySelector('#skills'),
     document.querySelector('#education'),
     document.querySelector('#works'),
-]
+];
 
 export const colors = {
     white: '#ffffff',
     black: '#262626'
-}
+};
 
 export const easings = {
     // quint acceleration at the beginning
@@ -24,4 +24,4 @@ export const easings = {
     easeInOutExpo: 'cubic-bezier(0.87, 0, 0.13, 1)',
     // circle acceleration at the halfway point
     easeInOutCirc: 'cubic-bezier(0.85, 0, 0.15, 1)',
-}
+};

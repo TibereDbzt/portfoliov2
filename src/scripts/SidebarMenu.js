@@ -1,14 +1,12 @@
 export class SidebarMenu {
 
-    constructor (el, stepsNavigation) {
+    constructor (el) {
         this.DOM = {
             sidebar: el,
             marker: el.querySelector('[data-marker'),
             nav: el.querySelector('[data-nav]'),
             entries: el.querySelectorAll('[data-entry]')
         };
-
-        this.stepsNavigation = stepsNavigation;
 
         this.initElements();
         this.initEvents();
@@ -27,8 +25,7 @@ export class SidebarMenu {
             this.moveMarker(entry);
             this.DOM.entries.forEach((el, i) => {
                 if (el === entry) {
-                    this.onClickMenu(i+1);
-                    this.stepsNavigation.scroll();
+                    this.onClickMenu(i + 1);
                 }
             });
         });
@@ -54,7 +51,7 @@ export class SidebarMenu {
 
     getYOf (entry) {
         const bounding = entry.getBoundingClientRect();
-        return bounding.top + bounding.height/2 - (this.DOM.marker.getBoundingClientRect().height / 2);
+        return bounding.top + bounding.height / 2 - (this.DOM.marker.getBoundingClientRect().height / 2);
     }
     
 }

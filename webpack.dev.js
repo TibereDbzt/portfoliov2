@@ -18,6 +18,8 @@ let config = {
     filename: 'scripts/main.js'
   },
 
+  devtool: 'source-map',
+
   module: {
     rules: [
       {
@@ -113,7 +115,7 @@ let config = {
             },
           }
         ]
-      },
+      }
     ]
   },
   plugins: [

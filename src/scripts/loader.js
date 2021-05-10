@@ -3,12 +3,12 @@ import SimplexNoise from 'simplex-noise';
 import { map, getClientSize } from './modules/utils';
 
 let client = {width: window.innerWidth, height: window.innerHeight};
-window.addEventListener('resize', e => client = getClientSize(e));
+window.addEventListener('resize', e => { client = getClientSize(e); });
 
 const initCanvas = () => {
     const noiseScale = 80;
     const noiseRange = 4;
-    let bigCoordinates= [];
+    let bigCoordinates = [];
     const canvas = document.querySelector('.loader--canvas');
 
     paper.setup(canvas);
@@ -49,12 +49,12 @@ const initCanvas = () => {
     group.applyMatrix = false;
     // group.fullySelected = true;
 
-    const rateText = new paper.PointText(new paper.Point(client.width/2, client.height/2));
+    const rateText = new paper.PointText(new paper.Point(client.width / 2, client.height / 2));
     rateText.fillColor = '#0000000';
     rateText.fontFamily = 'Graphik';
     // rateText.applyMatrix = false;
 
-    group.position = new paper.Point(client.width/2, client.height/2);
+    group.position = new paper.Point(client.width / 2, client.height / 2);
 
     const noiseObjects = [
         loader[0].segments.map(() => new SimplexNoise()),
@@ -62,7 +62,6 @@ const initCanvas = () => {
     ];
 
     const symbols = '#[_-{}$;/%]!*?><=+'.split('');
-    let isLoading = true;
 
     const textAnimation = setInterval(() => {
         rateText.tween({
@@ -96,16 +95,15 @@ const initCanvas = () => {
     }, 500);
 
     window.addEventListener('resize', () => {
-        group.position = new paper.Point(client.width/2, client.height/2);
+        group.position = new paper.Point(client.width / 2, client.height / 2);
     });
 
     paper.view.onFrame = event => {
-        
         if (bigCoordinates.length === 0) {
             loader.forEach(p => {
                 p.segments.forEach((segment, i) => {
                     bigCoordinates[i] = [segment.point.x, segment.point.y];
-                })
+                });
             });
         }
 
@@ -124,7 +122,7 @@ const initCanvas = () => {
         // background.exclude(loader[0]);
         loader[0].smooth();
         loader[1].smooth();
-    }
-}
+    };
+};
 
 initCanvas();

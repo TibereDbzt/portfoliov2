@@ -22,16 +22,17 @@ export class PaperCanvas {
     }
 
     initEvents () {
-        document.querySelectorAll('.link').forEach((linkItem) => { /////////////////////// delegation ??
+        // events delegation ??
+        document.querySelectorAll('.link').forEach((linkItem) => {
             linkItem.addEventListener('mouseenter', e => this.noisyCursor.onMouseEnter(e));
             linkItem.addEventListener('mouseleave', () => this.noisyCursor.onMouseLeave());
-        })
+        });
     }
     
     render () {
         paper.view.onFrame = e => {
             this.noisyCursor.render(e);
-        }
+        };
     }
     
 }

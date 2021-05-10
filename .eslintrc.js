@@ -43,7 +43,7 @@ module.exports = {
     "func-call-spacing": ["warn", "never"],
     "generator-star-spacing": ["warn", {"before": true, "after": true}],
     "handle-callback-err": ["warn", "^(err|error)$"],
-    "indent": ["warn", 2, {
+    "indent": ["warn", 4, {
       "SwitchCase": 1,
       "VariableDeclarator": 1,
       "outerIIFEBody": 1,
@@ -132,7 +132,6 @@ module.exports = {
     "no-template-curly-in-string": "warn",
     "no-this-before-super": "warn",
     "no-throw-literal": "warn",
-    "no-trailing-spaces": "warn",
     "no-undef": "warn",
     "no-undef-init": "warn",
     "no-unexpected-multiline": "warn",
@@ -159,7 +158,7 @@ module.exports = {
     "object-property-newline": ["warn", {"allowMultiplePropertiesPerLine": true}],
     "one-var": ["warn", {"initialized": "never"}],
     "operator-linebreak": ["warn", "after", {"overrides": {"?": "before", ":": "before"}}],
-    "padded-blocks": ["warn", {"blocks": "never", "switches": "never", "classes": "never"}],
+    "padded-blocks": ["warn", {"blocks": "never", "switches": "never", "classes": "always"}],
     "prefer-promise-reject-errors": "warn",
     "quotes": ["warn", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
     "rest-spread-spacing": ["warn", "never"],
