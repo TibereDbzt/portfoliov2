@@ -1,4 +1,9 @@
+import gsap from 'gsap';
+import { getMousePos } from './utils';
 import { colors, easings } from './../config';
+
+let mouse = { x: -10, y: -10 };
+window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 
 /*
     REQUIRES :
@@ -92,7 +97,15 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
             { paddingTop: '0', borderBottom: '1px solid black' }
         ],
         { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
-    ));
-    const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
-    return {mask: animMask, content: animContent};
-};
+        ));
+        const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
+        return {mask: animMask, content: animContent};
+    };
+
+/*
+    REQUIRES :
+    <none>
+*/
+export const animSkewMouse = (el, duration, delay, easing, offset) => {
+    return gsap.to(el, {skewX: mouse.x*0.1, skewY: mouse.y*0.1, repeat: -1});
+}

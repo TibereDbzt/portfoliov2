@@ -1,0 +1,29 @@
+.goal
+    display: grid
+    grid-template-columns: 5fr 3fr 3fr 3fr
+    grid-template-rows: auto
+    align-content: space-between
+    column-gap: 8%
+
+    .goal__description
+        grid-row: span 2
+        text-align: justify
+    
+    .goal__item
+        width: fit-content
+        height: fit-content
+        text-transform: uppercase
+        font-size: 0.8rem
+        padding-top: 8px
+
+        &:nth-last-of-type(2), &:last-of-type
+            align-self: end
+            padding-bottom: 8px
+
+        .goal__header
+            color: $grey
+            margin-bottom: 0.8rem
+
+        .goal__content
+            color: $black
+            padding: 8px 0

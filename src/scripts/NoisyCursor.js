@@ -61,6 +61,26 @@ export default class NoisyCursor {
         });
     }
 
+    onLeaveScreen (e) {
+        this.group.tweenTo({
+            'opacity': 0,
+            'scaling': 0
+        }, {
+            'duration': 500,
+            'easing': 'easeOutQuart'
+        });
+    }
+
+    onEnterScreen (e) {
+        this.group.tweenTo({
+            'opacity': 1,
+            'scaling': 1
+        }, {
+            'duration': 500,
+            'easing': 'easeOutQuart'
+        });
+    }
+
     onMouseEnter (e) {
         this.targetBox = e.currentTarget.getBoundingClientRect();
         this.stuckX = Math.round(this.targetBox.left + this.targetBox.width / 2);
@@ -100,6 +120,7 @@ export default class NoisyCursor {
     }
 
     render (event) {
+        
         // check if is on link
         this.isStuck ? this.updateCoords(this.lastX, this.lastY, this.stuckX, this.stuckY) : this.updateCoords(this.lastX, this.lastY, mouse.x, mouse.y);
         

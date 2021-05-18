@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { debounce } from 'lodash-es';
 
 import { RollerSection } from './RollerSection';
-import { animateSkills, animateEducation } from './sections-animations';
+import { animateSkills, animateEducation, animateWorks } from './sections-animations';
 import { sections } from './config';
 
 window.onbeforeunload = () => window.scrollTo(0, 0);
@@ -64,7 +64,11 @@ export class SectionSlides {
         const sectionID = this.currentSection.id;
         const animations = {
             'skills': animateSkills,
-            'education': animateEducation
+            'education': animateEducation,
+            'works': animateWorks,
+            'goal': () => {},
+            'atthistime': () => {},
+            'contact': () => {}
         };
         return animations[sectionID](this.currentSection);
     }
@@ -81,7 +85,8 @@ export class SectionSlides {
     scroll () {
         this.setTranslateY();
         this.animateContainer();
-        if (!this.isOnRollerSection()) this.animateSection();
+        // if (!this.isOnRollerSection()) this.animateSection();
+        this.animateSection();
     }
 
     onClickMenu (indexSection) {

@@ -3,12 +3,15 @@ export const sections = [
     document.querySelector('#skills'),
     document.querySelector('#education'),
     document.querySelector('#works'),
+    document.querySelector('#goal'),
+    document.querySelector('#atthistime'),
     document.querySelector('#contact')
 ];
 
 export const colors = {
-    white: '#ffffff',
-    black: '#262626'
+    white: '#f2f3f5',
+    black: '#1d1d1d',
+    grey: '#BFBFBF'
 };
 
 export const easings = {

@@ -1,10 +1,20 @@
 body
+  position: relative
   font-family: 'Graphik Regular'
   font-weight: 400
   overflow: hidden
-
-main
-  background-color: $white
+  background: $white
+  
+  &::before
+    content: ''
+    position: fixed
+    top: -100%
+    left: -50%
+    width: 300%
+    height: 300%
+    background-image: url('./../assets/images/noise_bg.png')
+    opacity: 0.2
+    animation: noisy 8s steps(10) infinite
 
 // h1
 //   font-family: ''
