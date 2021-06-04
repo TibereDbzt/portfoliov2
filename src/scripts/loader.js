@@ -77,22 +77,25 @@ const initCanvas = () => {
         rateText.content = symbols[Math.floor(Math.random() * symbols.length)];
     }, 300);
 
-    const revealAnimation = setTimeout(() => {
-        let tween = group.tweenTo({
-            scaling: 30,
-            opacity: 1
-        }, {
-            duration: 600,
-            easing: 'easeInOutQuart'
-        });
-        tween.then(() => {
-            group.remove();
-            background.remove();
-            rateText.remove();
-            clearInterval(textAnimation);
-        });
-        clearTimeout(revealAnimation);
-    }, 500);
+    window.addEventListener('load', e => {
+        console.log('ok');
+        const revealAnimation = setTimeout(() => {
+            let tween = group.tweenTo({
+                scaling: 30,
+                opacity: 1
+            }, {
+                duration: 1200,
+                easing: 'easeInOutQuart'
+            });
+            tween.then(() => {
+                group.remove();
+                background.remove();
+                rateText.remove();
+                clearInterval(textAnimation);
+            });
+            clearTimeout(revealAnimation);
+        }, 500);
+    });
 
     window.addEventListener('resize', () => {
         group.position = new paper.Point(client.width / 2, client.height / 2);

@@ -1,7 +1,6 @@
 body
   position: relative
   font-family: 'Graphik Regular'
-  font-weight: 400
   overflow: hidden
   background: $white
   
@@ -15,6 +14,12 @@ body
     background-image: url('./../assets/images/noise_bg.png')
     opacity: 0.2
     animation: noisy 8s steps(10) infinite
+    z-index: 1000
+    pointer-events: none
+
+::selection
+  color: #ffffff
+  background-color: #353535
 
 // h1
 //   font-family: ''
@@ -38,7 +43,7 @@ h3
 
 p, li
   font-family: 'Graphik Light'
-  font-weight: 400
+  // font-weight: 400
   font-size: 0.8rem
   color: $black
   line-height: 28px

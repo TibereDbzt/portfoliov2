@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { animSkewTY, animBandReveal, animSkewOpacity, animOpacity, animTableReveal, animSkewMouse } from './modules/animations';
+import { animSkewTY, animBandReveal, animSkewOpacity, animOpacity, animTableReveal, animSkewMouse, animSplitParagraph } from './modules/animations';
 import { getMousePos } from './modules/utils';
 import { easings } from './config';
 
@@ -37,9 +37,14 @@ const animateEducation = (section) => {
         anim.content.play();
     });
 
-    const descriptions = section.querySelectorAll('.animSkewOpacity');
+    // const descriptions = section.querySelectorAll('.animSkewOpacity');
+    // descriptions.forEach((el, i) => {
+    //     animSkewOpacity(el, 1500, 500 * i, easings.easeInOutQuint, 500).play();
+    // });
+
+    const descriptions = section.querySelectorAll('.splitParagraphAnim');
     descriptions.forEach((el, i) => {
-        animSkewOpacity(el, 1500, 500 * i, easings.easeInOutQuint, 500).play();
+        animSplitParagraph(el, 1000, 300 * i, easings.easeOutQuint, 500);
     });
 };
 

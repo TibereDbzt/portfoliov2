@@ -6,7 +6,10 @@ import { RollerSection } from './RollerSection';
 import { animateSkills, animateEducation, animateWorks } from './sections-animations';
 import { sections } from './config';
 
-window.onbeforeunload = () => window.scrollTo(0, 0);
+window.onbeforeunload = () => {
+    window.scrollTo(0, 0);
+    
+};
 
 export class SectionSlides {
 
@@ -40,6 +43,14 @@ export class SectionSlides {
     }
 
     initEvents () {
+        window.onbeforeunload( e => {
+            this.setCurrentSection(0);
+            // this.DOM.container.style.transform = `translate3D()`
+            gsap.set(this.DOM.container, {
+                clearProps: "scale"
+            })
+            // this.scroll();
+        });
         const onScrollDebounced = debounce(this.onScroll.bind(this), 400, {
             'leading': true,
             'trailing': false

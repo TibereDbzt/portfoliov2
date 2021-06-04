@@ -1,24 +1,40 @@
-// Load Fonts
-@font-face
-  font-family: 'Graphik Regular'
-  font-style: normal
-  font-weight: 400
-  src: url('./../assets/fonts/Graphik-Regular.ttf')
-
 @font-face
   font-family: 'Graphik Black'
+  src: url('./../assets/fonts/Graphik-Black.woff2') format("woff2"), url('./../assets/fonts/Graphik-Black.woff') format("woff"), url('./../assets/fonts/Graphik-Black.ttf') format("truetype")
   font-style: normal
   font-weight: 900
-  src: url('./../assets/fonts/Graphik-Black.ttf')
+  font-display: swap
 
 @font-face
   font-family: 'Graphik Bold'
+  src: url('./../assets/fonts/Graphik-Bold.woff2') format("woff2"), url('./../assets/fonts/Graphik-Bold.woff') format("woff"), url('./../assets/fonts/Graphik-Black.ttf') format("truetype")
   font-style: normal
-  font-weight: 800
-  src: url('./../assets/fonts/Graphik-Bold.ttf')
+  font-weight: 700
+  font-display: swap
 
 @font-face
   font-family: 'Graphik Medium'
+  src: url('./../assets/fonts/Graphik-Medium.woff2') format("woff2"), url('./../assets/fonts/Graphik-Medium.woff') format("woff"), url('./../assets/fonts/Graphik-Medium.ttf') format("truetype")
   font-style: normal
-  font-weight: 600
-  src: url('./../assets/fonts/Graphik-Medium.ttf')
+  font-weight: 500
+  font-display: swap
+
+@font-face
+  font-family: 'Graphik Regular'
+  src: url('./../assets/fonts/Graphik-Regular.woff2') format("woff2"), url('./../assets/fonts/Graphik-Regular.woff') format("woff"), url('./../assets/fonts/Graphik-Regular.ttf') format("truetype")
+  font-style: normal
+  font-weight: 400
+  font-display: swap
+
+@font-face
+  font-family: 'Graphik Light'
+  src: url('./../assets/fonts/Graphik-Light.woff2') format("woff2"), url('./../assets/fonts/Graphik-Light.woff') format("woff"), url('./../assets/fonts/Graphik-Light.ttf') format("truetype")
+  font-style: normal
+  font-weight: 300
+  font-display: swap
+
+html
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialised
+  font-kerning: normal
+  font-feature-settings: "kern" 1

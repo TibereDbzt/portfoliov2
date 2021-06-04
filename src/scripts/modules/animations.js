@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { getMousePos } from './utils';
 import { colors, easings } from './../config';
+import { calculate, split } from './text';
 
 let mouse = { x: -10, y: -10 };
 window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
@@ -100,7 +101,7 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
         ));
         const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
         return {mask: animMask, content: animContent};
-    };
+};
 
 /*
     REQUIRES :
@@ -108,4 +109,24 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
 */
 export const animSkewMouse = (el, duration, delay, easing, offset) => {
     return gsap.to(el, {skewX: mouse.x*0.1, skewY: mouse.y*0.1, repeat: -1});
-}
+};
+
+/*
+    REQUIRES :
+    <none>
+*/
+export const animSplitParagraph = (el, duration, delay, easing, offset) => {
+    let words = split(el);
+    let innerWords = [];
+    words.forEach(word => {
+        innerWords.push(split(word));
+    });
+    // const lines = calculate(innerWords);
+    // console.log(lines);
+    innerWords.forEach((word, i) => {
+        gsap.from(word, { y: 20, duration: 0.3, delay: 0.1 * i, ease: "power4"})
+    });
+    // gsap.to()
+    // console.log(lines);
+    // const anim = gsap.tw
+};
