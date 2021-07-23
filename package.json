@@ -32,9 +32,9 @@
         "image-webpack-loader": "^7.0.1",
         "mini-css-extract-plugin": "^1.6.0",
         "node-sass": "^6.0.0",
-        "postcss": "^8.2.15",
+        "postcss": "^8.3.6",
         "postcss-flexbugs-fixes": "^5.0.2",
-        "postcss-loader": "^6.1.0",
+        "postcss-loader": "^6.1.1",
         "postcss-preset-env": "^6.7.0",
         "sass-loader": "^12.1.0",
         "style-loader": "^2.0.0",
@@ -44,10 +44,12 @@
         "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
-        "gsap": "^3.6.1",
-        "matter-js": "^0.17.0",
-        "paper": "^0.12.15",
+        "gsap": "npm:@gsap/member@^3.7.1",
+        "install": "^0.13.0",
         "lodash": "^4.17.21",
+        "matter-js": "^0.17.0",
+        "npm": "^7.20.1",
+        "paper": "^0.12.15",
         "simplex-noise": "^2.4.0",
         "virtual-scroll": "^2.1.1"
     }

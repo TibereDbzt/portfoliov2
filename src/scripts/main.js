@@ -21,14 +21,14 @@ navigation();
 new PaperCanvas(document.querySelector('.cursor--canvas'));
 new DotCursor(document.querySelector('.cursor'));
 
-const deezerDataEl = document.querySelector('[data-deezer-container]');
-const DEEZER_TOKEN = '';
-const DEEZER_REQUEST_HISTORY = 'https://api.deezer.com/user/926382981/history';
+// const deezerDataEl = document.querySelector('[data-deezer-container]');
+// const DEEZER_TOKEN = '';
+// const DEEZER_REQUEST_HISTORY = 'https://api.deezer.com/user/926382981/history';
 
-const request = new Request(DEEZER_REQUEST_HISTORY + '?access_token=' + DEEZER_TOKEN);
-const URL = request.url;
-const method = request.method;
-const credentials = request.credentials;
+// const request = new Request(DEEZER_REQUEST_HISTORY + '?access_token=' + DEEZER_TOKEN);
+// const URL = request.url;
+// const method = request.method;
+// const credentials = request.credentials;
 
-fetch(request)
-    .then(response => console.log(typeof response));
+// fetch(request)
+//     .then(response => console.log(typeof response));

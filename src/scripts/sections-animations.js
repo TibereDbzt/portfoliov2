@@ -1,14 +1,23 @@
-import gsap from 'gsap';
-import { animSkewTY, animBandReveal, animSkewOpacity, animOpacity, animTableReveal, animSkewMouse, animSplitParagraph } from './modules/animations';
-import { getMousePos } from './modules/utils';
-import { easings } from './config';
+import { animSkewTY, animBandReveal, animSkewOpacity, animOpacity, animTableReveal, animSkewMouse, animSplitParagraph } from 'modules/webapi-animations';
+import { getMousePos } from 'utils/getters';
+import { easings } from 'config';
+import { TranslateYSkewY } from 'modules/animations/TranslateYSkewY';
+import { EASES } from 'utils/eases';
 
 let mouse = { x: -10, y: -10 };
 window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 
 const animateSkills = (section) => {
-    const title = section.querySelector('.animSkewTY__inner');
-    animSkewTY(title, 1600, 0, easings.easeOutQuint).play();
+    const animatedElements = section.querySelectorAll('[data-animation]');
+    animatedElements.forEach(element => {
+        const animationClass = getAnimationClass(element);
+        new animationClass(element, 1.6, 0, EASES.markedOut);
+    });
+
+
+    // const title = section.querySelector('[data-anim-translateYSkewY]');
+    // // animSkewTY(title, 1600, 0, easings.easeOutQuint).play();
+    // new TranslateYSkewY(title, 1.6, 0, EASES.markedOut);
 
     const description = section.querySelector('.animSkewOpacity');
     animSkewOpacity(description, 1500, 500, easings.easeOutQuint, 0).play();
@@ -19,6 +28,14 @@ const animateSkills = (section) => {
         anim.mask.play();
         anim.content.play();
     });
+};
+
+const getAnimationClass = (element) => {
+    const animationAttributeValue = element.dataset.animation;
+    const animations = {
+        'translateYSkewY': TranslateYSkewY,
+    };
+    return animations[animationAttributeValue];
 };
 
 const animateEducation = (section) => {
@@ -44,7 +61,7 @@ const animateEducation = (section) => {
 
     const descriptions = section.querySelectorAll('.splitParagraphAnim');
     descriptions.forEach((el, i) => {
-        animSplitParagraph(el, 1000, 300 * i, easings.easeOutQuint, 500);
+        // animSplitParagraph(el, 1000, 300 * i, easings.easeOutQuint, 500);
     });
 };
 
@@ -66,7 +83,7 @@ const animateWorks = (section) => {
 
     //     console.log(dX);
     //     console.log(dY);
-        
+
     //     let deltaX = dX - mouse.x;
     //     let deltaY = dY - mouse.y;
 
@@ -74,7 +91,7 @@ const animateWorks = (section) => {
     //         // mouse = getMousePos(e);
     //         deltaX = dX - mouse.x;
     //         deltaY = dY - mouse.y;
-    
+
     //         console.log("skewX = " + deltaX);
     //         console.log("skewY = " + deltaY);
     //         gsap.to(preview, {skewX: deltaX*0.02, skewY: deltaY*0.02});
@@ -85,7 +102,7 @@ const animateWorks = (section) => {
     //     //     mouse = getMousePos(e);
     //     //     deltaX = dX - mouse.x;
     //     //     deltaY = dY - mouse.y;
-    
+
     //     //     console.log("skewX = " + deltaX);
     //     //     console.log("skewY = " + deltaY);
     //     //     gsap.to(preview, {skewX: deltaX*0.02, skewY: deltaY*0.02, repeat: -1});
@@ -93,7 +110,7 @@ const animateWorks = (section) => {
     // }, 300);
 
 
-    
+
     // const animskew = animSkewMouse(preview);
     // console.log(animskew);
 }

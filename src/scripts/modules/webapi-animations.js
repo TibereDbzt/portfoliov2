@@ -1,7 +1,7 @@
 import gsap from 'gsap';
-import { getMousePos } from './utils';
-import { colors, easings } from './../config';
-import { calculate, split } from './text';
+import { colors, easings } from 'config';
+import { getMousePos } from 'utils/getters';
+import { calculate, split } from 'utils/text';
 
 let mouse = { x: -10, y: -10 };
 window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
@@ -13,14 +13,12 @@ window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 */
 export const animSkewTY = (el, duration, delay, easing) => {
     return new Animation(new KeyframeEffect(
-        el,
-        [
-            { transform: `translate3D(0, 180px, 0) skew(0, 40deg)` },
-            { transform: `translate3D(0, 0, 0) skew(0, 0)` }
-        ],
-        { duration: duration, delay: delay, easing: easing, fill: 'both' }
-    ),
-    document.timeline);
+            el, [
+                { transform: `translate3D(0, 180px, 0) skew(0, 40deg)` },
+                { transform: `translate3D(0, 0, 0) skew(0, 0)` }
+            ], { duration: duration, delay: delay, easing: easing, fill: 'both' }
+        ),
+        document.timeline);
 };
 /*
     REQUIRES :
@@ -32,24 +30,20 @@ export const animBandReveal = (el, duration, delay, easing, offset) => {
     const content = el.querySelector('.animBand__content');
     const band = el.querySelector('.animBand__band');
     const animBand = new Animation(new KeyframeEffect(
-        band,
-        [
-            { width: '100%', transform: 'translate3D(-100%, 0, 0)' },
-            { width: '0', transform: 'translate3D(0, 0, 0)' }
-        ],
-        { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
-    ),
-    document.timeline);
+            band, [
+                { width: '100%', transform: 'translate3D(-100%, 0, 0)' },
+                { width: '0', transform: 'translate3D(0, 0, 0)' }
+            ], { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
+        ),
+        document.timeline);
     const animContent = new Animation(new KeyframeEffect(
-        content,
-        [
-            { color: colors.white },
-            { color: colors.black }
-        ],
-        { duration: 1, delay: offset * 2.5 + delay - 17, fill: 'both' }
-    ),
-    document.timeline);
-    return {band: animBand, content: animContent};
+            content, [
+                { color: colors.white },
+                { color: colors.black }
+            ], { duration: 1, delay: offset * 2.5 + delay - 17, fill: 'both' }
+        ),
+        document.timeline);
+    return { band: animBand, content: animContent };
 };
 
 /*
@@ -58,14 +52,13 @@ export const animBandReveal = (el, duration, delay, easing, offset) => {
 */
 export const animSkewOpacity = (el, duration, delay, easing, offset) => {
     return new Animation(new KeyframeEffect(
-        el,
-        [
-            { opacity: '0', transform: 'skew(0, 8deg)' },
-            { opacity: '0', transform: 'skew(0, 5deg)' },
-            { opacity: '1', transform: 'skew(0, 0)' }
-        ], { duration: duration, delay: delay, easing: easing, fill: 'both' }
-    ),
-    document.timeline);
+            el, [
+                { opacity: '0', transform: 'skew(0, 8deg)' },
+                { opacity: '0', transform: 'skew(0, 5deg)' },
+                { opacity: '1', transform: 'skew(0, 0)' }
+            ], { duration: duration, delay: delay, easing: easing, fill: 'both' }
+        ),
+        document.timeline);
 };
 
 /*
@@ -74,13 +67,12 @@ export const animSkewOpacity = (el, duration, delay, easing, offset) => {
 */
 export const animOpacity = (el, duration, delay, easing, offset) => {
     return new Animation(new KeyframeEffect(
-        el,
-        [
-            { opacity: '0' },
-            { opacity: '1' }
-        ], { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
-    ),
-    document.timeline);
+            el, [
+                { opacity: '0' },
+                { opacity: '1' }
+            ], { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
+        ),
+        document.timeline);
 };
 
 /*
@@ -91,16 +83,14 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
     const mask = el;
     const content = el.querySelector('.animTableReveal__inner');
     const animMask = new Animation(new KeyframeEffect(
-        mask,
-        [
+        mask, [
             { paddingTop: '120%', borderBottom: '1px solid rgba(0, 0, 0, 0)' },
             { paddingTop: '120%', borderBottom: '1px solid rgba(0, 0, 0, 1)', offset: 0.2 },
             { paddingTop: '0', borderBottom: '1px solid black' }
-        ],
-        { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
-        ));
-        const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
-        return {mask: animMask, content: animContent};
+        ], { duration: duration, delay: offset + delay, easing: easing, fill: 'both' }
+    ));
+    const animContent = animSkewTY(content, 2500, 1050, easings.easeOutQuint);
+    return { mask: animMask, content: animContent };
 };
 
 /*
@@ -108,7 +98,7 @@ export const animTableReveal = (el, duration, delay, easing, offset) => {
     <none>
 */
 export const animSkewMouse = (el, duration, delay, easing, offset) => {
-    return gsap.to(el, {skewX: mouse.x*0.1, skewY: mouse.y*0.1, repeat: -1});
+    return gsap.to(el, { skewX: mouse.x * 0.1, skewY: mouse.y * 0.1, repeat: -1 });
 };
 
 /*
@@ -124,7 +114,7 @@ export const animSplitParagraph = (el, duration, delay, easing, offset) => {
     // const lines = calculate(innerWords);
     // console.log(lines);
     innerWords.forEach((word, i) => {
-        gsap.from(word, { y: 20, duration: 0.3, delay: 0.1 * i, ease: "power4"})
+        gsap.from(word, { y: 20, duration: 0.3, delay: 0.1 * i, ease: "power4" })
     });
     // gsap.to()
     // console.log(lines);

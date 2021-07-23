@@ -1,8 +1,9 @@
 import paper from 'paper';
 import SimplexNoise from 'simplex-noise';
-import { map, getClientSize } from './modules/utils';
+import { getClientSize } from 'utils/getters';
+import { map } from 'utils/math';
 
-let client = {width: window.innerWidth, height: window.innerHeight};
+let client = { width: window.innerWidth, height: window.innerHeight };
 window.addEventListener('resize', e => { client = getClientSize(e); });
 
 const initCanvas = () => {

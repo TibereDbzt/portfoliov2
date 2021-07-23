@@ -1,9 +1,10 @@
 import paper from 'paper';
 import SimplexNoise from 'simplex-noise';
-import { lerp, map, getMousePos } from './modules/utils';
-import { colors } from './config';
+import { getMousePos } from 'utils/getters';
+import { lerp, map } from 'utils/math';
+import { colors } from 'utils/colors';
 
-let mouse = {x: -10, y: -10};
+let mouse = { x: -10, y: -10 };
 window.addEventListener('mousemove', e => { mouse = getMousePos(e); });
 
 const shapeBounds = {
@@ -15,7 +16,7 @@ const noiseRange = 4;
 
 export default class NoisyCursor {
 
-    constructor (nb) {
+    constructor(nb) {
         this.noise = [];
         this.cursors = this.createCursors(nb);
         this.group = this.createGroup();
@@ -35,11 +36,11 @@ export default class NoisyCursor {
         this.targetMaxWidth = 0;
     }
 
-    createNoise (shape) {
+    createNoise(shape) {
         this.noise.push(shape.segments.map(() => new SimplexNoise()));
     }
 
-    createCursors (nb) {
+    createCursors(nb) {
         let shapes = [];
         for (let i = 0; i < nb; i++) {
             const polygon = new paper.Path.RegularPolygon({
@@ -53,7 +54,7 @@ export default class NoisyCursor {
         return shapes;
     }
 
-    createGroup () {
+    createGroup() {
         return new paper.Group({
             children: this.cursors,
             strokeColor: colors.black,
@@ -61,7 +62,7 @@ export default class NoisyCursor {
         });
     }
 
-    onLeaveScreen (e) {
+    onLeaveScreen(e) {
         this.group.tweenTo({
             'opacity': 0,
             'scaling': 0
@@ -71,7 +72,7 @@ export default class NoisyCursor {
         });
     }
 
-    onEnterScreen (e) {
+    onEnterScreen(e) {
         this.group.tweenTo({
             'opacity': 1,
             'scaling': 1
@@ -81,7 +82,7 @@ export default class NoisyCursor {
         });
     }
 
-    onMouseEnter (e) {
+    onMouseEnter(e) {
         const targetBox = e.currentTarget.getBoundingClientRect();
         if (e.currentTarget.dataset.targetBoxSize) {
             this.targetMaxWidth = parseInt(e.currentTarget.dataset.targetBoxSize, 10);
@@ -93,20 +94,20 @@ export default class NoisyCursor {
         this.isStuck = true;
     }
 
-    onMouseLeave () {
+    onMouseLeave() {
         this.isStuck = false;
     }
 
-    updateCoords (lastX, lastY, currentX, currentY) {
+    updateCoords(lastX, lastY, currentX, currentY) {
         this.lastX = lerp(lastX, currentX, 0.2);
         this.lastY = lerp(lastY, currentY, 0.2);
     }
 
-    isBigEnough () {
+    isBigEnough() {
         return this.cursors[0].bounds.width > 30;
     }
 
-    removeNoise () {
+    removeNoise() {
         this.cursors.forEach(c => {
             c.segments.forEach((segment, i) => {
                 segment.point.set(this.bigCoordinates[i][0], this.bigCoordinates[i][1]);
@@ -114,30 +115,30 @@ export default class NoisyCursor {
         });
     }
 
-    distordCoords (count, indexCursor, indexSegment) {
+    distordCoords(count, indexCursor, indexSegment) {
         const noiseX = this.noise[indexCursor][indexSegment].noise2D(count / noiseScale, 0);
         const noiseY = this.noise[indexCursor][indexSegment].noise2D(count / noiseScale, 1);
         const distortionX = map(noiseX, -1, 1, -noiseRange, noiseRange);
         const distortionY = map(noiseY, -1, 1, -noiseRange, noiseRange);
         const x = this.bigCoordinates[indexSegment][0] + distortionX;
         const y = this.bigCoordinates[indexSegment][1] + distortionY;
-        return {x, y};
+        return { x, y };
     }
 
-    render (event) {
-        
+    render(event) {
+
         // check if is on link
         this.isStuck ? this.updateCoords(this.lastX, this.lastY, this.stuckX, this.stuckY) : this.updateCoords(this.lastX, this.lastY, mouse.x, mouse.y);
-        
+
         // console.log(this.lastX, this.lastY);
         this.group.position = new paper.Point(this.lastX, this.lastY);
-        
+
         // LINK HOVERED and NOT BIG ENOUGH
         if (this.isStuck && this.cursors[0].bounds.width < this.targetMaxWidth) {
             this.cursors.forEach(p => {
                 p.scale(1.08);
             });
-        // LINK NOT HOVERED and TOO BIG
+            // LINK NOT HOVERED and TOO BIG
         } else if (!this.isStuck && this.cursors[0].bounds.width > 30) {
             // hited once when leave a link
             if (this.isNoisy) {
@@ -173,5 +174,5 @@ export default class NoisyCursor {
             c.smooth({ type: 'geometric' });
         });
     }
-    
+
 }

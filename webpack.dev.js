@@ -2,9 +2,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PATHS = {
-    root: path.join(__dirname, '/'),
-    src: path.join(__dirname, '/src'),
-    dist: path.join(__dirname, '/dist'),
+    scripts: path.join(__dirname, '/src/scripts'),
+    styles: path.join(__dirname, '/src/styles'),
+    assets: path.join(__dirname, '/src/assets'),
+    node: path.join(__dirname, '/node_modules'),
 };
 
 const viewNames = [];
@@ -22,6 +23,15 @@ let config = {
 
     entry: {
         main: './src/scripts/main.js',
+    },
+
+    resolve: {
+        modules: [
+            PATHS.scripts,
+            PATHS.styles,
+            PATHS.assets,
+            PATHS.node,
+        ]
     },
 
     output: {
